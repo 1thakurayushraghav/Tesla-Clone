@@ -1,0 +1,137 @@
+/* ========== BASE NAVBAR ========== */
+.tesla-navbar {
+  background-color: #fff;
+  z-index: 1050;
+}
+
+/* Gradient logo text */
+.text-gradient {
+  background: linear-gradient(to right, #d00000, #ff6f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ========== DESKTOP NAV ITEMS ========== */
+.nav-item-hover span {
+  position: relative;
+  padding: 6px 4px;
+  transition: color 0.3s ease;
+}
+
+.nav-item-hover span:hover {
+  color: #d00000;
+}
+
+/* Underline effect on hover */
+.nav-item-hover span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #d00000;
+  transition: width 0.3s ease;
+}
+
+.nav-item-hover span:hover::after {
+  width: 100%;
+}
+
+/* ========== ACTIVE LINK STATE ========== */
+.active {
+  font-weight: bold;
+  color: #d00000 !important;
+}
+
+.icon-button.active svg {
+  stroke: #d00000;
+}
+
+/* ========== ICON BUTTONS ========== */
+.icon-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  transition: transform 0.2s ease;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+}
+
+.icon-button svg {
+  stroke: #333;
+  transition: stroke 0.3s ease;
+}
+
+/* ========== MOBILE MENU ========== */
+.mobile-nav {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.mobile-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-item a {
+  color: #333;
+  font-weight: 500;
+}
+
+.mobile-divider {
+  height: 1px;
+  background-color: #ccc;
+  margin: 12px 0;
+}
+
+/* ========== CUSTOM MENU TOGGLER ========== */
+.menu-toggle-button {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.custom-toggler {
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background-color: #000;
+  position: relative;
+}
+
+.custom-toggler::before,
+.custom-toggler::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #000;
+  transition: 0.3s ease;
+}
+
+.custom-toggler::before {
+  top: -8px;
+}
+
+.custom-toggler::after {
+  top: 8px;
+}
+
+/* ========== RESPONSIVENESS ========== */
+@media (max-width: 768px) {
+  .icon-button svg {
+    stroke: #444;
+  }
+
+  .mobile-nav .icon-button svg {
+    stroke: #000;
+  }
+}
