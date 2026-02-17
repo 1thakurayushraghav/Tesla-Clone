@@ -63,18 +63,19 @@ const RegionLanguagePage = () => {
   const popularCountries = ['US', 'CA', 'DE', 'GB', 'CN', 'AU'];
 
   const filteredRegions = useMemo(() => {
-    if (!searchTerm) return regions;
-    return regions
-      .map(region => ({
-        ...region,
-        countries: region.countries.filter(country =>
-          country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          country.code.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      }))
-      .filter(region => region.countries.length > 0);
-  }, [searchTerm]);
+  if (!searchTerm) return regions;
 
+  return regions
+    .map(region => ({
+      ...region,
+      countries: region.countries.filter(country =>
+        country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        country.code.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    }))
+    .filter(region => region.countries.length > 0);
+
+}, [searchTerm, regions]);
   const handleCountrySelect = (country) => {
     alert(`Selected: ${country.name} - ${country.languages[0]}`);
   };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ShoppingCart, Search, User, Plus, Minus, Trash2, Truck, Shield, Headphones } from 'lucide-react';
+import { X, ShoppingCart, Plus, Minus, Trash2, Truck, Shield, Headphones } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 

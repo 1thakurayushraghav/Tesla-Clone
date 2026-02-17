@@ -295,9 +295,9 @@ const Account = () => {
         {/* Footer Text */}
         <p className="text-center text-gray-400 mt-8">
           By continuing, you agree to Tesla's{' '}
-          <a href="#" className="text-blue-400 hover:text-blue-300">Terms of Service</a>
+          <a href="/" className="text-blue-400 hover:text-blue-300">Terms of Service</a>
           {' '}and{' '}
-          <a href="#" className="text-blue-400 hover:text-blue-300">Privacy Policy</a>
+          <a href="/" className="text-blue-400 hover:text-blue-300">Privacy Policy</a>
         </p>
       </div>
 
