@@ -3,6 +3,56 @@ import { Search, Globe, ChevronRight } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+const REGIONS = [
+  {
+    id: 'north-america',
+    name: 'North America',
+    countries: [
+      { code: 'US', name: 'United States', languages: ['English'], flag: '🇺🇸' },
+      { code: 'CA', name: 'Canada', languages: ['English', 'Français'], flag: '🇨🇦' },
+      { code: 'MX', name: 'México', languages: ['Español'], flag: '🇲🇽' }
+    ]
+  },
+  {
+    id: 'europe',
+    name: 'Europe',
+    countries: [
+      { code: 'DE', name: 'Deutschland', languages: ['Deutsch'], flag: '🇩🇪' },
+      { code: 'FR', name: 'France', languages: ['Français'], flag: '🇫🇷' },
+      { code: 'GB', name: 'United Kingdom', languages: ['English'], flag: '🇬🇧' },
+      { code: 'IT', name: 'Italia', languages: ['Italiano'], flag: '🇮🇹' },
+      { code: 'ES', name: 'España', languages: ['Español'], flag: '🇪🇸' },
+      { code: 'NL', name: 'Nederland', languages: ['Nederlands'], flag: '🇳🇱' },
+      { code: 'NO', name: 'Norge', languages: ['Norsk'], flag: '🇳🇴' },
+      { code: 'SE', name: 'Sverige', languages: ['Svenska'], flag: '🇸🇪' },
+      { code: 'DK', name: 'Danmark', languages: ['Dansk'], flag: '🇩🇰' },
+      { code: 'BE', name: 'België', languages: ['Nederlands', 'Français'], flag: '🇧🇪' }
+    ]
+  },
+  {
+    id: 'asia-pacific',
+    name: 'Asia Pacific',
+    countries: [
+      { code: 'CN', name: '中国', languages: ['中文'], flag: '🇨🇳' },
+      { code: 'JP', name: '日本', languages: ['日本語'], flag: '🇯🇵' },
+      { code: 'KR', name: '대한민국', languages: ['한국어'], flag: '🇰🇷' },
+      { code: 'AU', name: 'Australia', languages: ['English'], flag: '🇦🇺' },
+      { code: 'NZ', name: 'New Zealand', languages: ['English'], flag: '🇳🇿' },
+      { code: 'SG', name: 'Singapore', languages: ['English'], flag: '🇸🇬' },
+      { code: 'HK', name: '香港', languages: ['中文', 'English'], flag: '🇭🇰' }
+    ]
+  },
+  {
+    id: 'middle-east',
+    name: 'Middle East',
+    countries: [
+      { code: 'AE', name: 'الإمارات العربية المتحدة', languages: ['العربية', 'English'], flag: '🇦🇪' },
+      { code: 'IL', name: 'ישראל', languages: ['עברית', 'English'], flag: '🇮🇱' },
+      { code: 'TR', name: 'Türkiye', languages: ['Türkçe'], flag: '🇹🇷' }
+    ]
+  }
+];
+
 const RegionLanguagePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -10,72 +60,24 @@ const RegionLanguagePage = () => {
     AOS.init({ duration: 800 });
   }, []);
 
-  const regions = [
-    {
-      id: 'north-america',
-      name: 'North America',
-      countries: [
-        { code: 'US', name: 'United States', languages: ['English'], flag: '🇺🇸' },
-        { code: 'CA', name: 'Canada', languages: ['English', 'Français'], flag: '🇨🇦' },
-        { code: 'MX', name: 'México', languages: ['Español'], flag: '🇲🇽' }
-      ]
-    },
-    {
-      id: 'europe',
-      name: 'Europe',
-      countries: [
-        { code: 'DE', name: 'Deutschland', languages: ['Deutsch'], flag: '🇩🇪' },
-        { code: 'FR', name: 'France', languages: ['Français'], flag: '🇫🇷' },
-        { code: 'GB', name: 'United Kingdom', languages: ['English'], flag: '🇬🇧' },
-        { code: 'IT', name: 'Italia', languages: ['Italiano'], flag: '🇮🇹' },
-        { code: 'ES', name: 'España', languages: ['Español'], flag: '🇪🇸' },
-        { code: 'NL', name: 'Nederland', languages: ['Nederlands'], flag: '🇳🇱' },
-        { code: 'NO', name: 'Norge', languages: ['Norsk'], flag: '🇳🇴' },
-        { code: 'SE', name: 'Sverige', languages: ['Svenska'], flag: '🇸🇪' },
-        { code: 'DK', name: 'Danmark', languages: ['Dansk'], flag: '🇩🇰' },
-        { code: 'BE', name: 'België', languages: ['Nederlands', 'Français'], flag: '🇧🇪' }
-      ]
-    },
-    {
-      id: 'asia-pacific',
-      name: 'Asia Pacific',
-      countries: [
-        { code: 'CN', name: '中国', languages: ['中文'], flag: '🇨🇳' },
-        { code: 'JP', name: '日本', languages: ['日本語'], flag: '🇯🇵' },
-        { code: 'KR', name: '대한민국', languages: ['한국어'], flag: '🇰🇷' },
-        { code: 'AU', name: 'Australia', languages: ['English'], flag: '🇦🇺' },
-        { code: 'NZ', name: 'New Zealand', languages: ['English'], flag: '🇳🇿' },
-        { code: 'SG', name: 'Singapore', languages: ['English'], flag: '🇸🇬' },
-        { code: 'HK', name: '香港', languages: ['中文', 'English'], flag: '🇭🇰' }
-      ]
-    },
-    {
-      id: 'middle-east',
-      name: 'Middle East',
-      countries: [
-        { code: 'AE', name: 'الإمارات العربية المتحدة', languages: ['العربية', 'English'], flag: '🇦🇪' },
-        { code: 'IL', name: 'ישראל', languages: ['עברית', 'English'], flag: '🇮🇱' },
-        { code: 'TR', name: 'Türkiye', languages: ['Türkçe'], flag: '🇹🇷' }
-      ]
-    }
-  ];
 
   const popularCountries = ['US', 'CA', 'DE', 'GB', 'CN', 'AU'];
 
   const filteredRegions = useMemo(() => {
-  if (!searchTerm) return regions;
+    if (!searchTerm) return REGIONS;
 
-  return regions
-    .map(region => ({
-      ...region,
-      countries: region.countries.filter(country =>
-        country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        country.code.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    }))
-    .filter(region => region.countries.length > 0);
+    return REGIONS
+      .map(region => ({
+        ...region,
+        countries: region.countries.filter(country =>
+          country.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          country.code.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      }))
+      .filter(region => region.countries.length > 0);
 
-}, [searchTerm, regions]);
+  }, [searchTerm]);
+
   const handleCountrySelect = (country) => {
     alert(`Selected: ${country.name} - ${country.languages[0]}`);
   };
@@ -83,7 +85,7 @@ const RegionLanguagePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 pt-20">
       <div className="container mx-auto px-4 py-12">
-        
+
         {/* Header */}
         <div className="text-center mb-12" data-aos="fade-down">
           <div className="inline-block p-4 bg-white rounded-full shadow-lg mb-6">
@@ -116,7 +118,7 @@ const RegionLanguagePage = () => {
           <div className="mb-16" data-aos="fade-up">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Popular Regions</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
-              {regions.flatMap(region =>
+              {REGIONS.flatMap(region =>
                 region.countries.filter(c => popularCountries.includes(c.code))
               ).map((country, index) => (
                 <div

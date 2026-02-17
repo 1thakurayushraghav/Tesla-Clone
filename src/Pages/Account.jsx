@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Mail, Lock, User, Eye, EyeOff, Check } from 'lucide-react';
+import {  Mail, Lock, Eye, EyeOff, Check } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
