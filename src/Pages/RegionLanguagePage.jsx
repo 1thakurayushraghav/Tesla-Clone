@@ -1,57 +1,61 @@
-import React, { useState, useMemo } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Search, Globe, ChevronRight } from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const RegionLanguagePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    AOS.init({ duration: 800 });
+  }, []);
 
   const regions = [
     {
       id: 'north-america',
       name: 'North America',
       countries: [
-        { code: 'US', name: 'United States', languages: ['English'] },
-        { code: 'CA', name: 'Canada', languages: ['English', 'Français'] },
-        { code: 'MX', name: 'México', languages: ['Español'] }
+        { code: 'US', name: 'United States', languages: ['English'], flag: '🇺🇸' },
+        { code: 'CA', name: 'Canada', languages: ['English', 'Français'], flag: '🇨🇦' },
+        { code: 'MX', name: 'México', languages: ['Español'], flag: '🇲🇽' }
       ]
     },
     {
       id: 'europe',
       name: 'Europe',
       countries: [
-        { code: 'DE', name: 'Deutschland', languages: ['Deutsch'] },
-        { code: 'FR', name: 'France', languages: ['Français'] },
-        { code: 'GB', name: 'United Kingdom', languages: ['English'] },
-        { code: 'IT', name: 'Italia', languages: ['Italiano'] },
-        { code: 'ES', name: 'España', languages: ['Español'] },
-        { code: 'NL', name: 'Nederland', languages: ['Nederlands'] },
-        { code: 'NO', name: 'Norge', languages: ['Norsk'] },
-        { code: 'SE', name: 'Sverige', languages: ['Svenska'] },
-        { code: 'DK', name: 'Danmark', languages: ['Dansk'] },
-        { code: 'BE', name: 'België', languages: ['Nederlands', 'Français'] }
+        { code: 'DE', name: 'Deutschland', languages: ['Deutsch'], flag: '🇩🇪' },
+        { code: 'FR', name: 'France', languages: ['Français'], flag: '🇫🇷' },
+        { code: 'GB', name: 'United Kingdom', languages: ['English'], flag: '🇬🇧' },
+        { code: 'IT', name: 'Italia', languages: ['Italiano'], flag: '🇮🇹' },
+        { code: 'ES', name: 'España', languages: ['Español'], flag: '🇪🇸' },
+        { code: 'NL', name: 'Nederland', languages: ['Nederlands'], flag: '🇳🇱' },
+        { code: 'NO', name: 'Norge', languages: ['Norsk'], flag: '🇳🇴' },
+        { code: 'SE', name: 'Sverige', languages: ['Svenska'], flag: '🇸🇪' },
+        { code: 'DK', name: 'Danmark', languages: ['Dansk'], flag: '🇩🇰' },
+        { code: 'BE', name: 'België', languages: ['Nederlands', 'Français'], flag: '🇧🇪' }
       ]
     },
     {
       id: 'asia-pacific',
       name: 'Asia Pacific',
       countries: [
-        { code: 'CN', name: '中国', languages: ['中文'] },
-        { code: 'JP', name: '日本', languages: ['日本語'] },
-        { code: 'KR', name: '대한민국', languages: ['한국어'] },
-        { code: 'AU', name: 'Australia', languages: ['English'] },
-        { code: 'NZ', name: 'New Zealand', languages: ['English'] },
-        { code: 'SG', name: 'Singapore', languages: ['English'] },
-        { code: 'HK', name: '香港', languages: ['中文', 'English'] }
+        { code: 'CN', name: '中国', languages: ['中文'], flag: '🇨🇳' },
+        { code: 'JP', name: '日本', languages: ['日本語'], flag: '🇯🇵' },
+        { code: 'KR', name: '대한민국', languages: ['한국어'], flag: '🇰🇷' },
+        { code: 'AU', name: 'Australia', languages: ['English'], flag: '🇦🇺' },
+        { code: 'NZ', name: 'New Zealand', languages: ['English'], flag: '🇳🇿' },
+        { code: 'SG', name: 'Singapore', languages: ['English'], flag: '🇸🇬' },
+        { code: 'HK', name: '香港', languages: ['中文', 'English'], flag: '🇭🇰' }
       ]
     },
     {
       id: 'middle-east',
       name: 'Middle East',
       countries: [
-        { code: 'AE', name: 'الإمارات العربية المتحدة', languages: ['العربية', 'English'] },
-        { code: 'IL', name: 'ישראל', languages: ['עברית', 'English'] },
-        { code: 'TR', name: 'Türkiye', languages: ['Türkçe'] }
+        { code: 'AE', name: 'الإمارات العربية المتحدة', languages: ['العربية', 'English'], flag: '🇦🇪' },
+        { code: 'IL', name: 'ישראל', languages: ['עברית', 'English'], flag: '🇮🇱' },
+        { code: 'TR', name: 'Türkiye', languages: ['Türkçe'], flag: '🇹🇷' }
       ]
     }
   ];
@@ -76,77 +80,56 @@ const RegionLanguagePage = () => {
   };
 
   return (
-    <div className="bg-light min-vh-100 d-flex flex-column" >
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <Link to="/" className="navbar-brand fw-bold">Tesla</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              {['Model S', 'Model 3', 'Model X', 'Model Y', 'Energy', 'Region & Language'].map((item, i) => (
-                <li className="nav-item" key={i}>
-                  <a className={`nav-link ${item === 'Region & Language' ? 'active' : ''}`} href="/">{item}</a>
-                </li>
-              ))}
-            </ul>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 pt-20">
+      <div className="container mx-auto px-4 py-12">
+        
+        {/* Header */}
+        <div className="text-center mb-12" data-aos="fade-down">
+          <div className="inline-block p-4 bg-white rounded-full shadow-lg mb-6">
+            <Globe className="w-16 h-16 text-blue-600" />
           </div>
-        </div>
-      </nav>
-
-      {/* Main Content with max height */}
-      <div
-        className="container  flex-grow-1 overflow-auto mt-2 bg-secondary"
-        style={{ maxHeight: '80vh', maxWidth:'100%' }}
-      >
-        <div className="text-center mb-5 ">
-          <h1 className="display-4 fw-bold text-light">Select Your Region</h1>
-          <p className="lead  text-light">Choose your country or region to see local pricing, incentives, and delivery options.</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Select Your Region
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Choose your country or region to see local pricing, incentives, and delivery options
+          </p>
         </div>
 
         {/* Search */}
-        <div className="row justify-content-center mb-4">
-          <div className="col-md-6">
-            <div className="input-group input-group-lg">
-              <span className="input-group-text bg-white">
-                <i className="bi bi-search" />
-              </span>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search countries..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+        <div className="max-w-2xl mx-auto mb-12" data-aos="fade-up">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6" />
+            <input
+              type="text"
+              placeholder="Search countries..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-14 pr-6 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+            />
           </div>
         </div>
 
         {/* Popular Regions */}
         {!searchTerm && (
-          <div className="mb-5">
-            <h3 className="h4 mb-3 text-light">Popular Regions</h3>
-            <div className="row g-3">
+          <div className="mb-16" data-aos="fade-up">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Popular Regions</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
               {regions.flatMap(region =>
                 region.countries.filter(c => popularCountries.includes(c.code))
-              ).map(country => (
-                <div key={country.code} className="col-md-4 col-lg-3">
-                  <div className="card h-100 shadow-sm" role="button" onClick={() => handleCountrySelect(country)}>
-                    <div className="card-body text-center p-4">
-                      <div className="display-6 mb-2">
-                        {country.code === 'US' && '🇺🇸'}
-                        {country.code === 'CA' && '🇨🇦'}
-                        {country.code === 'DE' && '🇩🇪'}
-                        {country.code === 'GB' && '🇬🇧'}
-                        {country.code === 'CN' && '🇨🇳'}
-                        {country.code === 'AU' && '🇦🇺'}
-                      </div>
-                      <h5>{country.name}</h5>
-                      <small className="text-muted">{country.languages.join(', ')}</small>
-                    </div>
+              ).map((country, index) => (
+                <div
+                  key={country.code}
+                  onClick={() => handleCountrySelect(country)}
+                  className="bg-white rounded-2xl shadow-lg p-6 text-center cursor-pointer hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group"
+                  data-aos="zoom-in"
+                  data-aos-delay={index * 50}
+                >
+                  <div className="text-5xl mb-3 group-hover:scale-110 transition-transform">
+                    {country.flag}
                   </div>
+                  <h3 className="font-bold text-gray-900 mb-1">{country.name}</h3>
+                  <p className="text-sm text-gray-500">{country.languages.join(', ')}</p>
                 </div>
               ))}
             </div>
@@ -154,39 +137,47 @@ const RegionLanguagePage = () => {
         )}
 
         {/* All Regions */}
-        {filteredRegions.map(region => (
-          <div key={region.id} className="mb-5">
-            <h3 className="h4 text-light mb-3">{region.name}</h3>
-            <div className="row g-3">
-              {region.countries.map(country => (
-                <div key={country.code} className="col-md-6 col-lg-4">
-                  <div className="card shadow-sm h-100" role="button" onClick={() => handleCountrySelect(country)}>
-                    <div className="card-body d-flex justify-content-between align-items-center p-3">
+        <div className="space-y-12">
+          {filteredRegions.map((region, regionIndex) => (
+            <div key={region.id} data-aos="fade-up" data-aos-delay={regionIndex * 100}>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">{region.name}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {region.countries.map((country, countryIndex) => (
+                  <div
+                    key={country.code}
+                    onClick={() => handleCountrySelect(country)}
+                    className="bg-white rounded-xl shadow-md p-5 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex items-center justify-between"
+                    data-aos="fade-right"
+                    data-aos-delay={countryIndex * 30}
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-4xl group-hover:scale-110 transition-transform">
+                        {country.flag}
+                      </span>
                       <div>
-                        <h6 className="mb-1 fw-semibold">{country.name}</h6>
-                        <small className="text-muted">{country.languages.join(', ')}</small>
+                        <h3 className="font-bold text-gray-900 text-lg">{country.name}</h3>
+                        <p className="text-sm text-gray-500">{country.languages.join(', ')}</p>
                       </div>
-                      <i className="bi bi-chevron-right text-muted" />
                     </div>
+                    <ChevronRight className="w-6 h-6 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
 
         {/* No Results */}
         {filteredRegions.length === 0 && (
-          <div className="text-center ">
-            <div className="display-1 mb-3">🔍</div>
-            <h4>No regions found</h4>
-            <p className="text-muted">Try searching with a different term or browse all available regions above.</p>
+          <div className="text-center py-20" data-aos="fade-up">
+            <div className="text-8xl mb-6">🔍</div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">No regions found</h3>
+            <p className="text-gray-600 text-lg">
+              Try searching with a different term or browse all available regions above
+            </p>
           </div>
         )}
       </div>
-
-      {/* Footer */}
-     
     </div>
   );
 };
