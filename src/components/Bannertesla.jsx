@@ -3,45 +3,46 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './Bannertesla.css';
 
+const bannerModels = [
+  {
+    tagline: "Plaid",
+    subtitle: "Beyond Ludicrous",
+    image: "https://images.pexels.com/photos/26957121/pexels-photo-26957121.jpeg",
+    range: "405 mi",
+    speed: "1.99s",
+    topSpeed: "200 mph",
+  },
+  {
+    tagline: "Long Range",
+    subtitle: "7-Seat Configuration",
+    image: "https://images.pexels.com/photos/27038707/pexels-photo-27038707.jpeg",
+    range: "330 mi",
+    speed: "4.8s",
+    topSpeed: "135 mph",
+  }
+];
+
 const Bannertesla = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const bannerModels = [
-    {
-      tagline: "Plaid",
-      subtitle: "Beyond Ludicrous",
-      image: " https://images.pexels.com/photos/26957121/pexels-photo-26957121.jpeg",
-      range: "405 mi",
-      speed: "1.99s",
-      topSpeed: "200 mph",
-    },
-   
-    {
-      tagline: "Long Range",
-      subtitle: "7-Seat Configuration",
-      image: "https://images.pexels.com/photos/27038707/pexels-photo-27038707.jpeg",
-      range: "330 mi",
-      speed: "4.8s",
-      topSpeed: "135 mph",
-    }
-  ];
-
   useEffect(() => {
     AOS.init({ duration: 1200, easing: 'ease-in-out-cubic', once: true });
+
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % bannerModels.length);
+      setCurrentSlide(prev => (prev + 1) % bannerModels.length);
     }, 4000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, []); // ✅ no error now
 
   return (
     <section
-       className="tesla-banner"
-  style={{
-    backgroundImage: `url(${bannerModels[currentSlide].image})`,
-    width: '100%',
-    height: '80vh',
-  }}
+      className="tesla-banner"
+      style={{
+        backgroundImage: `url(${bannerModels[currentSlide].image})`,
+        width: '100%',
+        height: '80vh',
+      }}
       data-aos="fade"
     >
       <div className="overlay" />
